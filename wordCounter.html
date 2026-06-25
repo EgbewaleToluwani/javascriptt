@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .heading {
+            background: linear-gradient(90deg, #28094E, #0D053B);
+            color: white;
+            padding: 10dvh 20dvw;
+        }
+
+        .heading h1 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 44px;
+        }
+
+        .heading p {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #C7D2FE;
+            width: 65%;
+            line-height: 4dvh;
+        }
+
+        .count-div {
+            margin: -5dvh 20dvw;
+            width: 60dvw;
+            min-height: 50dvh;
+            box-shadow: 0 0 10px black;
+            border-radius: 15px;
+            z-index: 10;
+            background: white;
+            padding: 5dvh 2dvw;
+        }
+
+        
+    </style>
+    <div class="heading">
+        <h1>Word Counter</h1>
+        <p>Count words, characters, sentences, paragraphs and reading time as you type — every stat updates live, all processed locally in your browser.</p>
+    </div>
+
+
+    <div class="count-div">
+        <p style="color: black;">Your text</p>
+        <textarea name="" id="wordCounter" onkeyup="countWords()" placeholder="Start typing..." style="padding: 3dvh 1dvw; margin: 2dvh 0; width: 100%; height: 30dvh; border-radius: 10px; border-color: rgba(0, 0, 0, 0.24);"></textarea>
+        <button style="margin-bottom: 2dvh; border-radius: 10px; padding: 7px 10px;" onclick="clearText()">Clear</button>
+        <tt><p><span id="wordCount">0</span>words &emsp; <span id="charCount">0</span>characters &emsp; <span id="sentCount">0</span>sentences</p></tt>
+
+    </div>
+
+
+    <script>
+        function countWords() {
+            let count = wordCounter.value
+            // console.log(count.length);
+            // console.log(count.trim().split(" ").length);
+            wordCount.innerText = count.trim().split(" ").length
+            charCount.innerText = count.length
+            sentCount.innerText = count.trim().split(". ").length
+        }
+
+        function clearText() {
+            wordCounter.value = ""
+            wordCount.innerText = 0
+            charCount.innerText = 0
+            sentCount.innerText = 0
+        }
+        </script>
+</body>
+</html>

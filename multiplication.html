@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="numberOne">
+    <input type="number" id="numberTwo">
+    <button onclick="generate()">GENERATE</button>
+    <br>
+    <br>
+    <table border="1">
+        <tr id="tableRow" style="text-wrap: nowrap;">
+
+        </tr>
+    </table>
+
+    <script>
+        function generate() {
+            //refresh everytime button is clicked
+            tableRow.innerHTML = ''
+            //set num to input value
+            let num1 = numberOne.value;
+            let num2 = numberTwo.value
+            for (let no1=1; no1<=num1; no1++) {
+                tableRow.innerHTML+=`<td>`
+                for (let no2=1; no2<=num2; no2++) {
+                    tableRow.innerHTML+=`${no1}x${no2} = ${no1*no2}<br>`
+                }
+                tableRow.innerHTML+=`</td>`  
+            }
+        }
+    </script>
+</body>
+</html>
