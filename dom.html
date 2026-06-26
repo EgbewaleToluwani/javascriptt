@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 id="info"><span id="sade">I am a boy</span><span id="sweets"> with sweets</span></h1>
+
+
+    <script>
+        //DOM -> DOcument Object Manipulation
+
+        console.log(document.getElementById("info"));
+        console.log(document.getElementById("info").innerText);
+        console.log(document.getElementById("info").innerHTML);
+        console.log(document.getElementById("sade").innerText);
+        
+        document.getElementById("sade").innerHTML="<span style='color:red'>There is a girl</span>"
+        document.getElementById("sweets").innerHTML="<span style='color:blue'> with sweets</span>"
+        document.getElementById("sweets").style.color= "green"
+    </script>
+</body>
+</html>

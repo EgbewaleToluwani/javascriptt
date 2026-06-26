@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="charac" placeholder="Type your text here" onkeyup="checkWords()"></textarea>
+    <br><tt><span id="result">0</span> word(s) &emsp; <span id="charResult">0</span> character(s)</tt>
+
+
+    <script>
+        let myName = "   Ayomidimeji   "
+
+        console.log(myName.length);
+        console.log(myName.charAt(4));
+        console.log(myName.endsWith("I"));
+        console.log(myName.includes("o"));
+        console.log(myName.concat("oluwa"));
+        console.log(myName.toLocaleUpperCase());
+        console.log(myName.trim());
+        console.log(myName.split("i"));   
+        
+
+        function checkWords() {
+            // console.log(document.getElementById("charac").value);
+            let words = charac.value;
+            // instead of innerText or innerHTML we use value for input tags and text areas
+            console.log(words.split(" "));
+            //splits the words at the spaces between words so it counts words not characters
+            console.log(words.trim().split(" ").length);
+            //trims whitespace before and after the text and counts the length of the sentence
+            let wordCount =  words.trim().split(" ").length
+            //assigns the value to wordCount
+            
+            result.innerText = wordCount    
+            //uses that value for id=result to keep track of the word count
+            let charCount = words.length
+            charResult.innerText = charCount
+        }
+
+        
+    </script>
+</body>
+</html>

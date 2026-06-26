@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="clickMe()">click me</button>
+    <div style="width: 30dvw; height: 20dvh; background-color: black; color: gold; display: flex; align-items: center; justify-content: center; margin: auto auto;" onmouseover="hover()">HOVER FUNCTION</div>
+    <button onclick="shoutOut('Tolu', 'Uk')">SHOUT</button>
+    <button onclick="shout('UK')">Name</button>
+
+
+    <script>
+        function clickMe() {
+            alert('I am working')
+        }
+        function hover() {
+            alert('This is a hover function')
+        }
+        function shoutOut(firstname, lastname){
+            console.log(`I am shouting ${firstname+" "+lastname}`);
+        }
+        function shout(name) {
+            alert(`My name is ${name}`)
+        }
+    </script>
+</body>
+</html>
