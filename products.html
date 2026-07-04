@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="prodName" placeholder="Product Name">
+    <button onclick="submitProduct()">submit</button>
+    <br><br>
+    <button onclick="deleteProduct()">deleteLast</button>
+    <button onclick="addFirst()">Add First</button>
+    <button onclick="deleteFirst()">Delete First</button>
+    <button onclick="reverseProducts()">Reverse</button>
+    <div id="prodList"></div>
+
+
+    <script>
+        let prodArray=[]
+
+        function displayProd() {
+            prodList.innerHTML=''
+            for (let i = 0; i < prodArray.length; i++) {
+                const element = prodArray[i];
+                prodList.innerHTML+=`<h1>${element}</h1>`
+                
+            }
+        }
+
+        function submitProduct() {
+            prodArray.push(prodName.value)
+            console.log(prodArray);
+            prodName.value=''
+            displayProd()
+        }
+
+        function deleteProduct() {
+            prodArray.pop()
+            displayProd()
+        }
+
+        function addFirst() {
+            prodArray.unshift(prodName.value)
+            displayProd()
+        }
+   
+        function deleteFirst() {
+            prodArray.shift()
+            displayProd()
+        }
+
+        function reverseProducts() {
+            prodArray.reverse()
+            displayProd()
+        }
+
+
+
+   </script>
+</body>
+</html>

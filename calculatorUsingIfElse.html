@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .calculator {
+            width: 30dvw;
+            height: 80dvh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid black;
+            border-radius: 20px;
+            padding: 2dvh 1dvw;
+        }
+
+        .inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .calculator button {
+            height: 10dvh;
+            width: 7dvw;
+            position: absolute;
+        }
+
+        #zero {
+            bottom: 0;
+            width: 23dvw;
+        }
+
+        #one {
+            bottom: 11dvh;
+        }
+
+        #two {
+            bottom: 11dvh;
+            left: 8dvw;
+        }
+
+        #three {
+            bottom: 11dvh;
+            left: 16dvw;
+        }
+
+        #four {
+            bottom: 22dvh;
+        }
+
+        #five {
+            bottom: 22dvh;
+            left: 8dvw;
+        }
+
+        #six {
+            bottom: 22dvh;
+            left: 16dvw;
+        }
+
+        #seven {
+            bottom: 33dvh;
+        }
+
+        #eight {
+            bottom: 33dvh;
+            left: 8dvw;
+        }
+
+        #nine {
+            bottom: 33dvh;
+            left: 16dvw;
+        }
+
+        #add {
+            bottom: 44dvh;
+        }
+
+        #minus {
+            bottom: 44dvh;
+            left: 8dvw;
+        }
+
+        #multiply {
+            bottom: 44dvh;
+            left: 16dvw;
+        }
+
+        #division {
+            bottom: 44dvh;
+            left: 24dvw;
+            width: 6dvw;
+        }
+
+        #ca {
+            left: 24dvw;
+            width: 6dvw;
+            bottom: 33dvh;
+        }
+
+        #equal {
+            width: 6dvw;
+            right: 0;
+            bottom: 0;
+            height: 32dvh;
+        }
+
+        #inp1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 9dvw;
+            height: 10dvh;
+            font-size: 28px;
+            font-weight: 700;
+            padding-left: 2dvw;
+        }
+
+        #sign {
+            position: absolute;
+            top: 0;
+            left: 12dvw;
+            width: 3.5dvw;
+            height: 10dvh;
+            font-size: 28px;
+            font-weight: 700;
+            padding-left: 2dvw;
+        }
+
+        #inp2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 9dvw;
+            height: 10dvh;
+            font-size: 28px;
+            font-weight: 700;
+            padding-left: 2dvw;
+        }
+
+        #result {
+            width: 27.5dvw;
+            height: 11dvh;
+            position: absolute; 
+            top: 12dvh;
+            font-size: 28px;
+            font-weight: 700;
+            padding-left: 2dvw;
+        }
+    </style>
+
+
+    <div class="calculator">
+        <div class="inner">
+            <input type="number" id="inp1" placeholder="0" disabled>
+            <input type="text" id="sign" disabled>
+            <input type="number" id="inp2" placeholder="0" disabled>
+            <input type="number" id="result" disabled>
+            <button id="zero" onclick="input(0)">0</button>
+            <button id="one" onclick="input(1)">1</button>
+            <button id="two" onclick="input(2)">2</button>
+            <button id="three" onclick="input(3)">3</button>
+            <button id="four" onclick="input(4)">4</button>
+            <button id="five" onclick="input(5)">5</button>
+            <button id="six" onclick="input(6)">6</button>
+            <button id="seven" onclick="input(7)">7</button>
+            <button id="eight" onclick="input(8)">8</button>
+            <button id="nine" onclick="input(9)">9</button>
+
+            <button id="add" onclick="ari('+')">+</button>
+            <button id="minus" onclick="ari('-')">-</button>
+            <button id="multiply" onclick="ari('*')">*</button>
+            <button id="division" onclick="ari('/')">/</button>
+            <button id="ca" onclick="erase()">C</button>
+            <button id="equal" onclick="sum()">=</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        
+        function input(num) {
+            if (sign.value=='') {
+                inp1.value+=num
+                result.value = ''
+            } else {
+                inp2.value+=num
+            }
+        }
+
+        function ari(sym) {
+            sign.value = sym
+        }
+
+        
+        function sum() {
+            if (sign.value=='+') {
+                const answer = Number(inp1.value) + Number(inp2.value)
+                result.value = answer
+            } else if (sign.value=='-') {
+                const answer = inp1.value - inp2.value
+                result.value = answer
+            } else if (sign.value=='*') {
+                const answer = inp1.value * inp2.value
+                result.value = answer
+            } else if (sign.value=='/') {
+                const answer = inp1.value / inp2.value
+                result.value = answer
+            }
+            inp1.value = ''
+            inp2.value = ''
+            sign.value = ''
+        }
+        
+        function erase() {
+            inp1.value = ''
+            inp2.value = ''
+            sign.value = ''
+            result.value = ''
+        }
+
+    </script>
+</body>
+</html>

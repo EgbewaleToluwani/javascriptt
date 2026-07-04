@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+        //arrays are data types, they are a list of data, and they are recognized by []
+
+        let arr = ['biro', 'pencil', 'book', 'chalk', 'marker', 'crayon']
+        console.log(arr);
+        console.log(arr.length);
+        console.log(arr.includes('biro'));
+        arr.pop() //removes the last item
+        console.log(arr);
+        arr.shift() //removes the first item
+        console.log(arr);
+        arr.push('table') // adds item to the end
+        console.log(arr);
+        arr.unshift('blade') //adds item to start
+        console.log(arr);
+
+        let arr2 = ['Kola', 'Sade', 'John']
+        console.log(arr.concat(arr2)); //joins two arrays
+        console.log(arr.reverse());
+
+        //slice, splice
+
+        let fruits = ['mango', 'apple', 'watermelon', 'lime', 'orange', 'grape']
+        console.log(fruits.slice(0, 4)); //starts at index (0), returns count 4 mango, apple, watermelon, lime (count starts from position 1)
+
+        let students = ['Tolu', 'Blessing', 'Ife', 'Goodness']
+        students.splice(2,1) //starts at index 2, deletes 1 values from that point (delete starts from position of index)
+        console.log(students); // Tolu, Blessing, Goodness
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+    </script>
+</body>
+</html>

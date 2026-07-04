@@ -7,25 +7,29 @@
 </head>
 <body>
     
-    <input type="number" placeholder="Number" id="num1">
-    <input type="number" placeholder="Number" id="num2">
-    <br><br>
-    <button onclick="arithmetic('+')">+</button>
-    <button onclick="arithmetic('-')">-</button>
-    <button onclick="arithmetic('*')">*</button>
-    <button onclick="arithmetic('/')">/</button>
+    <input type="text" placeholder="0" id="no" disabled>
+    <button onclick="clickNum(0)">0</button>
+    <button onclick="clickNum(1)">1</button>
+    <button onclick="clickNum(2)">2</button>
+    <button onclick="clickNum(3)">3</button>
+    <button onclick="clickNum(4)">4</button>
+    <button onclick="clickNum(5)">5</button>
+    <button onclick="clickNum(6)">6</button>
+    <button onclick="clickNum(7)">7</button>
+    <button onclick="clickNum(8)">8</button>
+    <button onclick="clickNum(9)">9</button>
 
+    <button onclick="clickNum('+')">+</button>
+    <button onclick="ari()">=</button>
 
     <script>
-        function arithmetic(sign) {
-            let Num1 = num1.value
-            let Num2 = num2.value
-            if (sign == +) {
-                let Num3 = Num1 + Num2
+        function clickNum(num) {
+            no.value+=num
+        }
 
-            } else {
-                
-            }
+        function ari() {
+            const answer = eval(no.value)
+            no.value = answer
         }
     </script>
 </body>

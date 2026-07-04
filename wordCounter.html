@@ -64,7 +64,7 @@
             let count = wordCounter.value
             // console.log(count.length);
             // console.log(count.trim().split(" ").length);
-            wordCount.innerText = count.trim().split(" ").length
+            wordCount.innerText = count.trim().split(/\s+/).length
             charCount.innerText = count.length
             sentCount.innerText = count.trim().split(". ").length
         }
