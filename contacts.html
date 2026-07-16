@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        .formDetails {
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 30rem;
+            padding: 40px 20px;
+            margin-left: 30px;
+            margin-top: 70px;
+        }
+
+        .formDetails input {
+            height: 70px;
+            padding-left: 20px;
+        }
+
+        .formDetails button {
+            width: 40%;
+        }
+
+        #contactList {
+            margin-top: 50px;
+            margin-left: 30px;
+            margin-bottom: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <!-- image, first name, last name, workplace
+    submit, edit, delete
+    list -->
+
+    <div class="formDetails">
+        <h2>CONTACTS</h2>
+        <input type="text" id="firstName" placeholder="First Name" autofocus>
+        <input type="text" id="lastName" placeholder="Last Name">
+        <input type="text" id="workplace" placeholder="Workplace">
+        <input type="text" id="profilePicture" placeholder="Profile Picture">
+        <button class="btn btn-success" onclick="addContact()">Add Contact</button>
+    </div>   
+
+    <button class="btn btn-primary ms-4 mt-5" onclick="viewContacts()">View Contacts</button>
+    <div id="contactList"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        let contacts = []
+
+        function addContact() {
+            const defaultProfilePicture = "data:image/jpeg;base64,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"
+
+            let contact = {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                workplace: workplace.value,
+                profilePicture: profilePicture.value || defaultProfilePicture,
+                blocked: false
+            }
+
+            if (profilePicture.value.trim()=='') {
+                profilePicture.value=""
+            } else {
+                profilePicture.value = profilePicture.value
+            }
+
+            if (firstName.value.trim()=='' || lastName.value.trim()=='' || workplace.value.trim()=='') {
+                alert("Please fill the form")
+            } else {
+                contacts.push(contact)
+            }
+
+
+            firstName.value=''
+            lastName.value=''
+            workplace.value=''
+            profilePicture.value=''
+            console.log(contacts);
+        }
+
+        function viewContacts() {
+            contactList.innerHTML=''
+            for (let i = 0; i < contacts.length; i++) {
+                const element = contacts[i];
+                contactList.innerHTML+=`<div class="card" style="width: 18rem;">
+<img src="${element.profilePicture}" class="card-img-top" alt="...">
+<div class="card-body">
+    <h5 class="card-title">${element.firstName} ${element.lastName}</h5>
+    <p class="card-text">Workplace: ${element.workplace}</p>
+  </div>
+  <ul class="list-group list-group-flush d-flex flex-column gap-3 pe-2 pb-3 pt-3">
+    <li class="d-flex justify-content-end"><button onclick="editContact(${i})" class="btn btn-dark w-50">Edit</button></li>
+    <li class="d-flex justify-content-end"><button onclick="blockContact(${i})" id="btn-${i}" class="btn w-50 btn-warning">Block</button></li>
+    <li class="d-flex justify-content-end"><button onclick="deleteContact(${i})" class="btn btn-danger w-50">Delete</button></li>
+  </ul>
+</div>`
+            }
+        }
+
+        function editContact(index) {
+            let newFirstName = prompt("First Name:", contacts[index].firstName)
+            let newLastName = prompt("Last Name:", contacts[index].lastName)
+            let newWorkplace = prompt("Workplace:", contacts[index].workplace)
+            let newProfilePicture = prompt("Profile Picture:", contacts[index].profilePicture)
+
+            contacts[index] = {
+                firstName: newFirstName?newFirstName:contacts[index].firstName,
+                lastName: newLastName?newLastName:contacts[index].lastName,
+                workplace: newWorkplace?newWorkplace:contacts[index].workplace,
+                profilePicture: newProfilePicture?newProfilePicture:contacts[index].profilePicture
+            }
+            viewContacts()
+        }
+        
+        function blockContact(index) {
+            contacts[index].blocked=!contacts[index].blocked
+            console.log(contacts[index].blocked);
+            let blockButton = document.getElementById(`btn-${index}`)
+            contacts[index].blocked
+                ? (blockButton.style.backgroundColor = "red", blockButton.innerText="Unblock")
+                : (blockButton.style.backgroundColor = "#ffc107", blockButton.innerText='Block');
+        }
+    
+        function deleteContact(index) {
+            contacts.splice(index, 1)
+            viewContacts()
+        }
+    </script>
+</body>
+</html>

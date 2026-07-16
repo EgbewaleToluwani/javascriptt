@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+    <script>
+        const car = {
+            overview:
+                {
+                    name: "Bugatti Tourbillon",
+                    numberOfUnits: "250 units",
+                    basePrice: "$4.5million",
+                },
+            
+            engine: 
+                {
+                    engineType: "V16",
+                    enginePower: "1000hp",
+                    electricPower: "800hp",
+                    totalPower: "1800hp",
+                    transmission: "8-speed dual-clutch automatic",
+                    drive: "AWD"
+                },
+            
+            performance: 
+                {
+                    "0-100km/h": "2.0 seconds",
+                    "0-200km/h": "Under 5.0 seconds",
+                    "0-300km/h": "Under 10.0 seconds",
+                    "0-400km/h": "Under 25.0 seconds",
+                    maximumTopSpeed: "445km/h"
+                },
+            
+            dimensions: 
+                {
+                    weight: "1995kg",
+                    length: "4.6m",
+                    width: "2.1m",
+                    height: "1.1m"
+                }
+            
+        }
+
+        console.log(car.overview.name);
+        console.log(car.overview.basePrice);
+        console.log(car.overview.numberOfUnits);
+        console.log(car.engine.engineType);
+        console.log(car.engine.totalPower);
+        console.log(car.performance["0-100km/h"]);
+        console.log(car.performance.maximumTopSpeed);
+        console.log(car.dimensions.weight);
+        
+    </script>
+</body>
+</html>

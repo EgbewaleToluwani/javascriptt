@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <img id="bulb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQewqXpbK1XhtKhVPwnna4l0ONJEg7xhe5MroO4GIQMxh-672__-76Tbxwg&s=10" alt="">
+    
+    <button id="onLight" onclick="switchLight()">Switch Off</button>
+
+    <style>
+        #bulb{
+            filter: none;
+        }
+    </style>
+
+
+    <script>
+        function switchLight(){
+            console.log("I am working");
+
+            let bulbb = document.getElementById("bulb")
+
+            // Classic if else statement
+
+            // if(bulbb.style.filter=="grayscale(100%)"){
+            //     bulbb.style.filter="none"
+            // }else{
+            //     bulbb.style.filter="grayscale(100%)"
+            // }
+
+            // Ternary operator
+            bulbb.style.filter=="grayscale(100%)"? (bulbb.style.filter="none", document.getElementById("onLight").innerText="Switch Off"): (bulbb.style.filter="grayscale(100%)", document.getElementById("onLight").innerText="Switch On");
+            
+        }
+    </script>
+</body>
+</html>

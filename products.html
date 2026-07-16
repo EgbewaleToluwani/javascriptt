@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
 </head>
+
 <body>
-    <input type="text" id="prodName" placeholder="Product Name">
+    <input type="text" id="prodName" placeholder="Product Name" autofocus>
+    <input type="text" id="prodPrice" placeholder="Product Price">
+    <input type="text" id="prodQuantity" placeholder="Product Quantity">
+    <input type="text" id="prodDescription" placeholder="Product Description">
+    <input type="text" id="prodImage" placeholder="Product Image">
+
+
     <button onclick="submitProduct()">submit</button>
     <br><br>
     <button onclick="deleteProduct()">deleteLast</button>
@@ -16,24 +25,144 @@
     <div id="prodList"></div>
 
 
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
         let prodArray=[]
+
+        function submitProduct() {
+            let prodObj = {
+                prodName: prodName.value,
+                prodPrice: prodPrice.value,
+                prodQuantity: prodQuantity.value,
+                prodDescription: prodDescription.value,
+                prodImage: prodImage.value,
+                addedToCart: false
+            }
+
+
+            //we have objects inside the array. each item is an object taking four values - name, price, quantity, image - instead of the singular name value we had before.
+            //each item has four values, the array contains different items
+            //we have Ai, Aii, Aiii, Aiv, Bi, Bii, Biii, Biv...
+
+            prodArray.push(prodObj)   
+            prodName.value=''
+            prodPrice.value=''
+            prodQuantity.value=''
+            prodDescription.value=''
+            prodImage.value=''
+            displayProd()
+        }
 
         function displayProd() {
             prodList.innerHTML=''
             for (let i = 0; i < prodArray.length; i++) {
                 const element = prodArray[i];
-                prodList.innerHTML+=`<h1>${element}</h1>`
-                
+                //element is now iterating through objects, not individual values so we need to iterate the objects so it shows the values inside the objects not the objects themselves
+                prodList.innerHTML+=`<div class="card" style="width: 25rem; padding: 0 5px">
+                <img src="${element.prodImage}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${element.prodName}</h5>
+                    <p class="card-text">${element.prodDescription}</p>
+                        <span>Price: $${element.prodPrice}</span>&emsp;<span>Quantity: ${element.prodQuantity}</span>
+                    <br>
+                    <div class="d-flex gap-2 mb-2">
+                        <button class="btn btn-primary" onclick="edit(${i})">Edit</button><button class="btn btn-danger" onclick="deleteSpecific(${i})">Delete</button>
+                    </div>
+                        <button class="btn btn-dark" id="btn-${i}" onclick="addToCart(${i})">Add to Cart</button>
+                </div>
+                </div>`
             }
         }
 
-        function submitProduct() {
-            prodArray.push(prodName.value)
-            console.log(prodArray);
-            prodName.value=''
-            displayProd()
+        function addToCart(index) {
+            prodArray[index].addedToCart=!prodArray[index].addedToCart
+            console.log(prodArray[index]);
+            let btnId = document.getElementById(`btn-${index}`)
+            console.log(btnId);
+            console.log(btnId.style.backgroundColor);
+            
+            
+            if (prodArray[index].addedToCart) {
+                btnId.style.backgroundColor = "green"
+                btnId.innerText="Added to Cart"
+            } else {
+                btnId.style.backgroundColor = "black"
+                btnId.innerText="Add to Cart"
+            }
+            
         }
+
+       
+
+        function deleteSpecific(index) {
+            prodArray.splice(index, 1)
+            displayProd()
+        }         
+
+        function edit(index) {
+            let newProdName = prompt("New Product Name", prodArray[index].prodName)
+            let newProdPrice = prompt("New Product Price", prodArray[index].prodPrice)
+            let newProdQuantity = prompt("New Product Quantity", prodArray[index].prodQuantity)
+            let newProdDescription = prompt("New Product Description", prodArray[index].prodDescription)
+            let newProdImage = prompt("New Product Image", prodArray[index].prodImage)
+            
+            prodArray[index] = {
+                prodName: newProdName?newProdName:prodArray[index].prodName,
+                prodPrice: newProdPrice?newProdPrice:prodArray[index].prodPrice,
+                prodQuantity: newProdQuantity?newProdQuantity:prodArray[index].prodQuantity,
+                prodDescription: newProdDescription?newProdDescription:prodArray[index].prodDescription,
+                prodImage: newProdImage?newProdImage:prodArray[index].prodImage,
+            }
+            displayProd()
+            // if (newProdName == null) {
+            //     prodArray[index].prodName = prodArray[index].prodName
+            // } else if (newProdName == "") {
+            //     prodArray[index].prodName = prodArray[index].prodName
+            // } else {
+            //     prodArray[index].prodName = newProdName                
+            // }
+            
+            // let newProdPrice = prompt("New Product Price", prodArray[index].prodPrice)
+            // if (newProdPrice == null) {
+            //     prodArray[index].prodPrice = prodArray[index].prodPrice
+            // } else if (newProdName == "") {
+            //     prodArray[index].prodPrice = prodArray[index].prodPrice
+            // } else {
+            //     prodArray[index].prodPrice = newProdPrice                
+            // }
+            
+            // let newProdQuantity = prompt("New Product Quantity", prodArray[index].prodQuantity)
+            // if (newProdQuantity == null) {
+            //     prodArray[index].prodQuantity = prodArray[index].prodQuantity
+            // } else if (newProdQuantity == "") {
+            //     prodArray[index].prodQuantity = prodArray[index].prodQuantity
+            // } else {
+            //     prodArray[index].prodQuantity = newProdQuantity                
+            // }
+            
+            // let newProdDescription = prompt("New Product Description", prodArray[index].prodDescription)
+            // if (newProdDescription == null) {
+            //     prodArray[index].prodDescription = prodArray[index].prodDescription
+            // } else if (newProdDescription == "") {
+            //     prodArray[index].proDescription = prodArray[index].prodDescription
+            // } else {
+            //     prodArray[index].prodDescription = newProdDescription                
+            // }
+            
+            // let newProdImage = prompt("New Product Image", prodArray[index].prodImage)
+            // if (newProdImage == null) {
+            //     prodArray[index].prodImage = prodArray[index].prodImage
+            // } else if (newProdImage == "") {
+            //     prodArray[index].prodImage = prodArray[index].prodImage
+            // } else {
+            //     prodArray[index].prodImage = newProdImage                
+            // }
+            // displayProd()   
+        }
+
+        
 
         function deleteProduct() {
             prodArray.pop()
@@ -42,6 +171,7 @@
 
         function addFirst() {
             prodArray.unshift(prodName.value)
+            prodName.value=''
             displayProd()
         }
    
