@@ -18,6 +18,10 @@
             margin-top: 70px;
         }
 
+        .formDetails h2 {
+            align-self: center;
+        }
+
         .formDetails input {
             height: 70px;
             padding-left: 20px;
@@ -70,12 +74,6 @@
                 workplace: workplace.value,
                 profilePicture: profilePicture.value || defaultProfilePicture,
                 blocked: false
-            }
-
-            if (profilePicture.value.trim()=='') {
-                profilePicture.value=""
-            } else {
-                profilePicture.value = profilePicture.value
             }
 
             if (firstName.value.trim()=='' || lastName.value.trim()=='' || workplace.value.trim()=='') {

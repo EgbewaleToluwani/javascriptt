@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="Car">
+        <h1 id="info"></h1>
+    </div>
+
+
+    
+
+
+    <script>
+        class Human {
+            constructor(legs, nose, head, name) {
+                this.legs = legs,
+                this.nose = nose,
+                this.head = head, 
+                this.name = name
+            }
+            drive(){
+                console.log(`${this.name} is driving`);  
+            }
+        }
+
+        let person = new Human(2, 1, 1, "Pampam")
+
+        console.log(person.head);
+        console.log(person.name);
+        person.drive()
+
+
+        class cars {
+            constructor(name, price, engine, speed) {
+                // this.picture = picture,
+                this.name = name,
+                this.price = price,
+                this.engine = engine,
+                this.speed = speed
+            }
+            picture(){
+
+            }
+
+        }
+        let dreamCar = new cars("Bugatti Tourbillon", "$4.5 million", "V16", "0-100km/h in 2s")
+        Car.innerHTML = `<h1>${dreamCar.name}</h1><p>${dreamCar.price}</p><p>${dreamCar.engine}</p><p>${dreamCar.speed}</p>`
+    </script>
+</body>
+</html>

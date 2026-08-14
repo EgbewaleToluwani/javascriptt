@@ -8,7 +8,7 @@
     
 </head>
 
-<body>
+<body onload="getFromLocal()">
     <input type="text" id="prodName" placeholder="Product Name" autofocus>
     <input type="text" id="prodPrice" placeholder="Product Price">
     <input type="text" id="prodQuantity" placeholder="Product Quantity">
@@ -18,11 +18,14 @@
 
     <button onclick="submitProduct()">submit</button>
     <br><br>
+    <input type="text" id="inp" onkeyup="searchItem()" placeholder="search products">
+    <br><br>
     <button onclick="deleteProduct()">deleteLast</button>
     <button onclick="addFirst()">Add First</button>
     <button onclick="deleteFirst()">Delete First</button>
     <button onclick="reverseProducts()">Reverse</button>
-    <div id="prodList"></div>
+
+    <div id="prodList" class="mt-5 d-flex gap-3"></div>
 
 
 
@@ -30,6 +33,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script>
         let prodArray=[]
+        // localStorage.setItem("products", "rice")
 
         function submitProduct() {
             let prodObj = {
@@ -37,7 +41,6 @@
                 prodPrice: prodPrice.value,
                 prodQuantity: prodQuantity.value,
                 prodDescription: prodDescription.value,
-                prodImage: prodImage.value,
                 addedToCart: false
             }
 
@@ -46,6 +49,7 @@
             //each item has four values, the array contains different items
             //we have Ai, Aii, Aiii, Aiv, Bi, Bii, Biii, Biv...
 
+            saveToLocal()
             prodArray.push(prodObj)   
             prodName.value=''
             prodPrice.value=''
@@ -55,25 +59,55 @@
             displayProd()
         }
 
+        function saveToLocal() {
+            let convProd = JSON.stringify(prodArray)
+            localStorage.setItem("products", convProd)
+        }
+
+        function getFromLocal() {
+            let prod = localStorage.getItem("products")
+            let convProd = JSON.parse(prod)
+            if (convProd==null) {
+                console.log("Nothing to display");
+                
+            } else {
+                prodArray = convProd
+                displayProd()
+            }
+            
+        }
+
+        const searchItem=()=>{
+            let searchedProd=prodArray.filter(prod=>prod.prodName.trim().toLowerCase().includes(inp.value.trim().toLowerCase()))
+            
+            if (inp.value.trim() !==  "") {
+                prodArray=searchedProd
+                displayProd()
+            } else {
+                getFromLocal()
+                displayProd()
+            }
+        }
+
         function displayProd() {
             prodList.innerHTML=''
-            for (let i = 0; i < prodArray.length; i++) {
-                const element = prodArray[i];
-                //element is now iterating through objects, not individual values so we need to iterate the objects so it shows the values inside the objects not the objects themselves
-                prodList.innerHTML+=`<div class="card" style="width: 25rem; padding: 0 5px">
-                <img src="${element.prodImage}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">${element.prodName}</h5>
-                    <p class="card-text">${element.prodDescription}</p>
-                        <span>Price: $${element.prodPrice}</span>&emsp;<span>Quantity: ${element.prodQuantity}</span>
-                    <br>
-                    <div class="d-flex gap-2 mb-2">
-                        <button class="btn btn-primary" onclick="edit(${i})">Edit</button><button class="btn btn-danger" onclick="deleteSpecific(${i})">Delete</button>
-                    </div>
-                        <button class="btn btn-dark" id="btn-${i}" onclick="addToCart(${i})">Add to Cart</button>
-                </div>
-                </div>`
-            }
+                for (let i = 0; i < prodArray.length; i++) {
+                    const element = prodArray[i];
+                    //element is now iterating through objects, not individual values so we need to iterate the objects so it shows the values inside the objects not the objects themselves
+                    prodList.innerHTML+=`<div class="card" style="width: 25rem; padding: 0 5px">
+                        <img src="${element.prodImage}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${element.prodName}</h5>
+                            <p class="card-text">${element.prodDescription}</p>
+                            <span>Price: $${element.prodPrice}</span>&emsp;<span>Quantity: ${element.prodQuantity}</span>
+                            <br>
+                            <div class="d-flex gap-2 mb-2">
+                                <button class="btn btn-primary" onclick="edit(${i})">Edit</button><button class="btn btn-danger" onclick="deleteSpecific(${i})">Delete</button>
+                                </div>
+                                <button class="btn btn-dark" id="btn-${i}" onclick="addToCart(${i})">Add to Cart</button>
+                                </div>
+                                </div>`
+                }
         }
 
         function addToCart(index) {
@@ -86,11 +120,12 @@
             
             if (prodArray[index].addedToCart) {
                 btnId.style.backgroundColor = "green"
-                btnId.innerText="Added to Cart"
+                btnId.textContent="Added to Cart"
             } else {
                 btnId.style.backgroundColor = "black"
-                btnId.innerText="Add to Cart"
+                btnId.textContent="Add to Cart"
             }
+            saveToLocal()
             
         }
 
@@ -99,6 +134,7 @@
         function deleteSpecific(index) {
             prodArray.splice(index, 1)
             displayProd()
+            saveToLocal()            
         }         
 
         function edit(index) {
@@ -114,7 +150,9 @@
                 prodQuantity: newProdQuantity?newProdQuantity:prodArray[index].prodQuantity,
                 prodDescription: newProdDescription?newProdDescription:prodArray[index].prodDescription,
                 prodImage: newProdImage?newProdImage:prodArray[index].prodImage,
+                addedToCart: addedToCart
             }
+            saveToLocal()
             displayProd()
             // if (newProdName == null) {
             //     prodArray[index].prodName = prodArray[index].prodName

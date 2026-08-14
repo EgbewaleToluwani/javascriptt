@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1 id="result"></h1>
+
+<div>
+    <h1>
+        <span id="hour">00</span>:
+        <span id="minute">59</span>:
+        <span id="second">55</span>
+    </h1>
+    <button onclick="startCount()">Start</button> <button onclick="stopCount()">Stop</button> <button onclick="resetCount()">Reset</button>
+</div>
+
+    <script>
+        let time = new Date()
+
+        console.log(time.getDate());
+        console.log(time.getDay());
+        console.log(time);
+        console.log(time.toLocaleDateString());
+        console.log(time.toLocaleTimeString());
+        
+        
+        //set interval, clear interval, set timeout
+        
+        setInterval(()=>{
+            let today = new Date()
+            result.innerHTML=today
+        }, 1000)
+
+        let timer;
+
+        const startCount = () => {
+            timer = setInterval(()=>{
+                let sec = second.innerHTML
+                sec++
+                second.innerHTML = sec
+                if (sec == 60) {
+                    let min = minute.innerHTML
+                    min++    
+                    minute.innerHTML = min
+                    second.innerHTML = 0  
+                }
+                if (minute.innerHTML == 60) {
+                    let hr = hour.innerHTML
+                    hr++
+                    hour.innerHTML = hr
+                    minute.innerHTML = 0
+                }
+            }, 1000)
+            
+        }
+
+        const stopCount = () => {
+            clearInterval(timer)
+        }
+
+        const resetCount = () => {
+            stopCount()
+            second.innerHTML = 0
+            minute.innerHTML = 0
+            hour.innerHTML = 0
+        }
+        
+    </script>
+</body>
+</html>

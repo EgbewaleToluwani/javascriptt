@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <!-- <h1 id="result"></h1> -->
+    <input type="text" id="textInput"><button onclick="doSave()">Save</button><button onclick="deleteLS()">Delete</button>
+    <h1 id="result"></h1>
+
+
+    <!-- Basic commands in programming
+    CRUD
+    Create - localStorage.setItem()
+    Read - localStorage.getItem()
+    Update
+    Delete - localStorage.removeItem()
+     -->
+
+     <script>
+        localStorage.setItem("name", "Uk")
+        let username = localStorage.getItem("name")
+        result.innerText=username
+        
+        function doSave() {
+            // console.log("hi");
+            localStorage.setItem("name", textInput.value)
+            let username = localStorage.getItem("name")
+            result.innerText=username
+        
+
+        }
+
+        function deleteLS() {
+            localStorage.removeItem("name")            
+            result.innerText=''
+            textInput.value=''
+        }
+
+        let fruits = ["mango", "orange", "apple"]
+        let convFruits = JSON.stringify(fruits)
+        localStorage.setItem("fruits", convFruits)
+        console.log(convFruits);
+        console.log(JSON.parse(convFruits));
+        
+        
+
+
+     </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 style="font-size: 60px;">
+            <span id="hour">0</span>:
+            <span id="minute">0</span>:
+            <span id="second">0</span>
+        </h1>
+    </div>
+    <br>
+    <input type="number" id="hourValue" placeholder="Hours" style="height: 30px; font-size: 16px;">
+    <input type="number" id="minuteValue" placeholder="Minutes" style="height: 30px; font-size: 16px;">
+    <input type="number" id="secondValue" placeholder="Seconds" style="height: 30px; font-size: 16px;">
+    <br><br>
+    <button onclick="setValues()">Set Timer</button>
+    <br><br>
+    <button onclick="startCount()">Start</button> <button onclick="stopCount()">Stop</button> <button onclick="resetCount()">Reset</button>
+    
+    
+    <script>
+        const alarm = new Audio("alarm.wav")
+
+        const clearInputs = () => {
+            hourValue.value = ""
+            minuteValue.value = ""
+            secondValue.value = ""
+        }
+
+        const setValues= () => {
+            hourValue.value? hour.innerHTML = hourValue.value : hour.innerHTML = hour.innerHTML ;
+            minuteValue.value? minute.innerHTML = minuteValue.value : minute.innerHTML = minute.innerHTML ;
+            secondValue.value? second.innerHTML = secondValue.value : second.innerHTML = second.innerHTML ;
+        }
+        
+        let timer;
+        const startCount = () => {
+            setValues()
+            timer = setInterval(()=>{
+                if (second.innerHTML > 0) {   
+                    let sec = second.innerHTML
+                    sec--
+                    second.innerHTML = sec
+                }
+                if (second.innerHTML < 0) {
+                    second.innerHTML = 59
+                    let min = minute.innerHTML
+                    min--
+                    minute.innerHTML = min
+                }
+                if (second.innerHTML == 0 && minute.innerHTML == 0 && hour.innerHTML > 0) {
+                    let hr = hour.innerHTML
+                    hr--
+                    hour.innerHTML = hr
+                    let min = minute.innerHTML
+                    min = 59
+                    minute.innerHTML = min
+                    let sec = second.innerHTML
+                    sec = 59
+                    second.innerHTML = sec
+                    sec--
+                }
+                if (hour.innerHTML == 0 && minute.innerHTML > 0 && second.innerHTML == 0) {
+                    let min = minute.innerHTML
+                    min--
+                    minute.innerHTML = min
+                    let sec = second.innerHTML
+                    sec = 59
+                    sec--
+                    second.innerHTML = sec
+                }
+                // if (hour.innerHTML > 0 &&) {
+                    
+                // }
+                if (second.innerHTML == 0 && minute.innerHTML == 0 && hour.innerHTML == 0) {
+                    stopCount()
+                    // alarm.play()
+                }
+            }, 10)
+            clearInputs()
+        }
+
+        const stopCount = () => {
+            clearInputs()
+            clearInterval(timer)
+        }
+
+        const resetCount = () => {
+            stopCount()
+            second.innerHTML = 0
+            minute.innerHTML = 0
+            hour.innerHTML = 0
+        }
+
+        // let timer;
+        // const startCount = () => {
+        //     timer = setInterval(()=>{
+        //         let sec = second.innerHTML
+        //         sec++
+        //         second.innerHTML = sec
+        //         if (sec == 60) {
+        //             let min = minute.innerHTML
+        //             min++    
+        //             minute.innerHTML = min
+        //             second.innerHTML = 0  
+        //         }
+        //         if (minute.innerHTML == 60) {
+        //             let hr = hour.innerHTML
+        //             hr++
+        //             hour.innerHTML = hr
+        //             minute.innerHTML = 0
+        //         }
+        //     }, 1000)
+            
+        // }
+    </script>
+</body>
+</html>

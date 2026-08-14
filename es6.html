@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="callSade()">Call</button>
+    <br><br>
+    <input type="text" id="searchFilter" onkeyup="searchTerm()">
+
+    <div id="result"></div>
+    <script>
+        //another version of JavaScript
+        //arrow functions
+        //return keyword
+        //Higher order functions
+        //callback function: ()=>{}
+
+        //arrow functions
+        const callSade=()=>{
+            console.log("sade abu");
+        }
+
+        // same as this
+        // function callSade() {
+        //     console.log("sade abu");
+        // }
+
+
+        //return keyword
+        const showMe=(a,b)=> {
+            return a+b //any code written under this in the function will not run
+            console.log("sade"); // will not run because the function has already been terminated by the return keyword
+        }
+        console.log(showMe(2,4));
+        
+
+        //Higher Order Functions
+        //i) Array Function
+        let fruits = ["strawberry", "pawpaw", "cherry", "grapes", "pineapple", "eba"]
+        //.map calls a defined callback function, also known as anonymous function, ()=>{}
+        //can accept up to three values but doesn't have to. Only the first is vital
+        //i: value - a string to represent each item in the array
+        //ii: index - number
+        //can be used to loop through array instead of using for loop
+        fruits.map((item, index)=>{
+            result.innerHTML+=`<h1>${item}</h1>`
+        })
+
+        //filter
+        //can be used to loop through same as map
+        //can also be used to filter array in search
+        // fruits.filter((items, index) => {
+        //     result.innerHTML+=`<h1>${items}</h1>`
+        // })
+
+        
+        const searchTerm=()=>{
+            let searchedItems = fruits.filter(item=>item.trim().toLowerCase().includes(searchFilter.value.trim().toLowerCase()))
+            result.innerHTML=""
+            searchedItems.map((item, index)=>{
+                result.innerHTML+=`<h1>${item}</h1>`
+            })            
+        }
+    </script>
+    
+</body>
+</html>
